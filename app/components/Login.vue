@@ -92,7 +92,6 @@ const metadata=user.user_metadata;
 ApplicationSettings.setString('user',JSON.stringify(metadata));
 this.$navigateTo(Home, {clearHistory: true});
 
-
 }else{
 this.error='Could not find user';
 }

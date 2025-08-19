@@ -1,8 +1,10 @@
 <script>
 import ClassPage from '../ClassPage.vue';
+import SettingsPage from '../SettingsPage.vue';
 export default {
 components:{
 ClassPage,
+SettingsPage
 },
 
 
@@ -21,6 +23,10 @@ data(){return{
 methods: {
 classNav(){
 this.$navigateTo(ClassPage);
+},
+
+settingsNav(){
+this.$navigateTo(SettingsPage);
 }
 
 
@@ -56,7 +62,7 @@ this.$navigateTo(ClassPage);
       col="0"
       text="SchoolMate"
       color="black"
-      fontSize="20"
+      fontSize="18"
       fontWeight="bold"
       verticalAlignment="middle"
     />
@@ -85,6 +91,7 @@ this.$navigateTo(ClassPage);
       marginLeft="16"
       class="fas"
       paddingRight="10"
+      @tap="settingsNav"
 
     />
     </GridLayout>

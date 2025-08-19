@@ -196,13 +196,20 @@ async refreshToken(){
     const check = await auth.getUserApi(token);
     const statusCode=check.statusCode;
     if(statusCode==200){
+
     return token;
+
     }else if(statusCode==403){
     let newToken=await auth.tokenRefresh();
     if(newToken.statusCode==200){
+
     newToken=JSON.parse(newToken.content);
     newToken=newToken.access_token;
+    
+
+
 return newToken;
+
     }else{
     console.log(newToken.statusCode);
     }
@@ -214,6 +221,11 @@ return newToken;
     }
 
 
+async signOut(){
+const auth=new Auth();
+
+
+}
 
 
 

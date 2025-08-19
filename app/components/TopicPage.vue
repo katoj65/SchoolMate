@@ -118,10 +118,8 @@ marginBottom="10"
 <Label padding="20" text="No content"></Label>
 </StackLayout>
 
-
 </StackLayout>
 <Skeleton v-else padding="15"/>
-
 
 </StackLayout>
 </ScrollView>

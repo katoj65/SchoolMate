@@ -1,17 +1,21 @@
 <script>
 import AppLayout from './Layout/AppLayout.vue';
+import Timetable from './templates/Timetable.vue';
 export default {
-components:{ AppLayout }
+components:{
+AppLayout,
+Timetable
+ }
 
 }
 </script>
 <template>
 <Page actionBarHidden="true">
-    <StackLayout backgroundColor="#F9FAFB" height="100%">
+<StackLayout backgroundColor="#F9FAFB" height="100%">
 <app-layout>
 
+<timetable/>
 
-<Label text="some information"></Label>
 
 </app-layout>
 </StackLayout>

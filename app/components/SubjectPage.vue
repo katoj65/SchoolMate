@@ -2,14 +2,19 @@
 import subjectApi from './api/subjectApi';
 import Skeleton from './templates/Skeleton.vue';
 import TopicPage from './TopicPage.vue';
+
 export default {
 components:{
 Skeleton,
 TopicPage
 },
+
 props:{
+
 subject_id : Number
+
 },
+
 data(){
 return{
 
@@ -51,14 +56,15 @@ console.log(response.statusCode);
 console.log(error);
 }
 
-
-
-
 },
 
+
+
+//navigate to topic
 topicNav(id){
 this.$navigateTo(TopicPage,{props:{topic_id:id}});
 }
+
 
 
 

@@ -10,8 +10,13 @@
         <item name="android:timePickerStyle">@style/SpinnerTimePicker</item>
     </style>
 
-    <style name="AppTheme" parent="AppThemeBase21">
-    </style>
+
+<style name="AppTheme" parent="AppThemeBase21">
+    <item name="android:statusBarColor">@color/colorPrimaryDark</item>
+    <item name="android:windowLightStatusBar">true</item> <!-- enables dark icons -->
+</style>
+
+
 
     <!-- Default style for DatePicker - in spinner mode -->
     <style name="SpinnerDatePicker" parent="android:Widget.Material.Light.DatePicker">

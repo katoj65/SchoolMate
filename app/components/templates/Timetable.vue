@@ -1,13 +1,14 @@
 <script>
 import * as ApplicationSettings from '@nativescript/core/application-settings';
 import Time from '../controllers/time';
+import TimetablePage from '../TimetablePage.vue';
 export default {
 props:{
 user:Object
 },
 
 components:{
-
+TimetablePage
 },
 
 data(){return{
@@ -61,6 +62,10 @@ let user=ApplicationSettings.getString('user',null);
 user=JSON.parse(user);
 this.fname=user.first_name;
 this.user_class=user.class;
+},
+
+timeTableNav(){
+this.$navigateTo(TimetablePage);
 }
 
 
@@ -126,6 +131,7 @@ marginTop="20"
 fontSize="18"
 fontWeight="bold"
 color="#111827"
+@tap="timeTableNav"
 />
 
 <StackLayout marginTop="15" spacing="15">

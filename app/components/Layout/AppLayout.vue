@@ -62,7 +62,7 @@ this.$navigateTo(SettingsPage);
       col="0"
       text="SchoolMate"
       color="black"
-      fontSize="18"
+      fontSize="22"
       fontWeight="bold"
       verticalAlignment="middle"
     />

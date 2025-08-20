@@ -11,17 +11,33 @@ methods:{
 
 
 async explain(){
+
+   
+try{
 const ai=new subtopicExplanation();
 const data=await ai.explanation('Explain how AI works in a few words in 100 words');
+
 if(!data){return;}
+
 if(data.statusCode==200){
+
 let response=data.content.toJSON();
 response=response.candidates;
-console.log(response);
+response=response[0];
+response=response.content;
+response=response.parts;
+const text=response[0];
+console.log(text);
 
 }else{
 console.log(data.statusCode);
 }
+}catch(error){
+console.log(error);
+}
+
+
+
 }
 
 

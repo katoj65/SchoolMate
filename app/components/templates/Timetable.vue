@@ -2,14 +2,19 @@
 import * as ApplicationSettings from '@nativescript/core/application-settings';
 import Time from '../controllers/time';
 import TimetablePage from '../TimetablePage.vue';
+import TimetableContent from '../modals/TimetableContent.vue';
+
+
 export default {
 props:{
 user:Object
 },
 
 components:{
-TimetablePage
+TimetablePage,
+TimetableContent,
 },
+
 
 data(){return{
 fname:null,
@@ -17,7 +22,7 @@ user_class:null,
 hours:null,
 date:null,
 time:null,
-greetings:null,
+greetings:'Welcome',
 intervalId:null,
 
 timetable:[
@@ -66,6 +71,10 @@ this.user_class=user.class;
 
 timeTableNav(){
 this.$navigateTo(TimetablePage);
+},
+
+timetableContentModal(){
+this.$showModal(TimetableContent,{ fullscreen: true, props: { id: 14 }});
 }
 
 
@@ -102,8 +111,7 @@ clearInterval(this.intervalId);
 <StackLayout padding="20" backgroundColor="#F9FAFB">
 <Label
 :text="greetings+' '+fname+' 🎉'"
-fontSize="24"
-fontWeight="bold"
+fontSize="22"
 color="#111827"
 style="text-transform: capitalize;"
 />
@@ -129,7 +137,6 @@ color="#6B7280"
 text="Weekly Revision Timetable"
 marginTop="20"
 fontSize="18"
-fontWeight="bold"
 color="#111827"
 @tap="timeTableNav"
 />
@@ -138,10 +145,10 @@ color="#111827"
 
 
 
-<StackLayout padding="15" backgroundColor="#FFFFFF" style="border-radius: 16; elevation: 2;" v-for="(entry, index) in timetable" :key="index" marginBottom="2" @tap="timetableDay">
+<StackLayout padding="15" backgroundColor="#FFFFFF" style="border-radius: 16; elevation: 2;" v-for="(entry, index) in timetable" :key="index" marginBottom="2" @tap="timetableContentModal()">
 <GridLayout columns="*, auto" verticalAlignment="center">
 
-<Label fontSize="18" fontWeight="bold" color="#111827">
+<Label fontSize="19"  color="#111827">
 <FormattedString>
 <Span text.decode="&#xf783;" class="fas" fontSize="18" color="#111827"/>
 <Span :text="' '+entry.day"/>

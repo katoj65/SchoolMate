@@ -1,5 +1,21 @@
 <script>
+import TimetableDay from './TimetableDay.vue';
 export default {
+components:{
+TimetableDay
+},
+
+
+
+methods:{
+timeTableDayModal(){
+this.$showModal(TimetableDay);
+}
+
+
+
+}
+
 
 }
 </script>

@@ -61,10 +61,10 @@ this.$navigateTo(SettingsPage);
     <Label
       col="0"
       text="SchoolMate"
-      color="black"
       fontSize="22"
       fontWeight="bold"
       verticalAlignment="middle"
+      color="#2C3E50"
     />
 
     <!-- First Material Icon -->

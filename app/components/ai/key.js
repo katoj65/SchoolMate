@@ -1,0 +1,1 @@
+export const ai_key='AIzaSyD38TtjILT76-mUGrV7IN2awiImH2t5Dsg';

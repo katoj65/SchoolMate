@@ -1,9 +1,11 @@
 <script>
 import topicApi from './api/topicApi';
 import Skeleton from './templates/Skeleton.vue';
+import SubtopicExplanation from './SubtopicExplanation.vue';
 export default {
 components:{
 Skeleton,
+SubtopicExplanation,
 },
 
 props:{
@@ -42,9 +44,6 @@ this.subtitle=element.description;
 this.subtopics=element.sub_topic;
 });
 
-
-
-
 }else{
 console.log(response.statusCode);
 }
@@ -52,7 +51,21 @@ console.log(response.statusCode);
 }catch(error){
 console.log(error);
 }
+},
+
+
+explanationNav(obj){
+this.$navigateTo(SubtopicExplanation,{
+props:{
+subtopic : obj
 }
+});
+}
+
+
+
+
+
 
 
 
@@ -105,7 +118,9 @@ marginBottom="10"
     shadowOpacity="0.1"
     shadowRadius="4"
     v-for="(i,key) in subtopics"
-    :key="key">
+    :key="key"
+    @tap="explanationNav(i)"
+    >
 
     <Label :text="i.name" fontSize="16" fontWeight="bold" color="#1F2937" />
     <Label :text="i.description" fontSize="14" marginTop="4" textWrap="true" color="#1F2937" />

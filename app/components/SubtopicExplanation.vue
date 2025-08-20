@@ -5,14 +5,17 @@ props:{
 subtopic:Object
 },
 
+data(){return{
+isLoading:false,
+responseText:null,
+
+}},
 
 
 methods:{
 
 
 async explain(){
-
-   
 try{
 const ai=new subtopicExplanation();
 const data=await ai.explanation('Explain how AI works in a few words in 100 words');
@@ -27,6 +30,7 @@ response=response[0];
 response=response.content;
 response=response.parts;
 const text=response[0];
+this.responseText=text.text;
 console.log(text);
 
 }else{
@@ -72,7 +76,10 @@ this.explain();
 <ScrollView height="100%">
 
 
-<Label text="AI content goes here"></Label>
+<StackLayout padding="15" backgroundColor="white" borderRadius="15" shadowColor="#00000033" shadowOpacity="0.1" shadowRadius="4">
+<!-- <Label :text="s.name" fontSize="18" fontWeight="bold" color="#2C3E50"/> -->
+<Label :text="responseText" fontSize="16" color="#7F8C8D" marginTop="4" textWrap="true"/>
+</StackLayout>
 
 
 

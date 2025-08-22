@@ -18,6 +18,7 @@ title:null,
 subtopics:[],
 isLoading:false,
 subtitle:null,
+subject:'Topic',
 
 }},
 
@@ -42,6 +43,8 @@ data.forEach(element => {
 this.title=element.name;
 this.subtitle=element.description;
 this.subtopics=element.sub_topic;
+this.subject='Topic in '+element.subject.name;
+
 });
 
 }else{
@@ -56,8 +59,9 @@ console.log(error);
 
 explanationNav(obj){
 this.$navigateTo(SubtopicExplanation,{
-props:{
-subtopic : obj
+props : {
+subtopic : obj,
+subject : this.subject
 }
 });
 }
@@ -91,7 +95,7 @@ this.getTopics();
 
 <StackLayout padding="20" backgroundColor="#f0f2f5">
 <Label :text="title" fontSize="22" fontWeight="bold" color="#2C3E50"/>
-<Label text="Topic in details" fontSize="14" color="#7F8C8D" marginTop="4"/>
+<Label :text="subject" fontSize="14" color="#7F8C8D" marginTop="4"/>
 </StackLayout>
 
 
@@ -120,17 +124,20 @@ marginBottom="10"
     v-for="(i,key) in subtopics"
     :key="key"
     @tap="explanationNav(i)"
-    >
+    orientation="horizontal">
 
-    <Label :text="i.name" fontSize="16" fontWeight="bold" color="#1F2937" />
-    <Label :text="i.description" fontSize="14" marginTop="4" textWrap="true" color="#1F2937" />
+
+<Label text.decode="&#xf111;" class="fas" width="8%" fontSize="8" color="#1F2937"/>
+<Label :text="i.name" fontSize="16"  color="#1F2937" width="92%" />
+
+
+    <!-- <Label :text="i.description" fontSize="14" marginTop="4" textWrap="true" color="#1F2937" /> -->
 
 </StackLayout>
-
 
 </StackLayout>
 <StackLayout v-else>
-<Label padding="20" text="No content"></Label>
+<Label padding="10" text="No content"></Label>
 </StackLayout>
 
 </StackLayout>

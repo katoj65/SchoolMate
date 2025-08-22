@@ -13,11 +13,29 @@ headers: {
 content: JSON.stringify({
 contents: [
 {
-parts: [
-{ text: subtopic }
-]
+parts : subtopic
 }
-]
+],
+
+generationConfig:{
+"responseMimeType": "application/json",
+"responseSchema": {
+"type": "object",
+"properties": {
+"topic": { "type": "string" },
+"definition": { "type": "string" },
+"examples": {
+"type": "array",
+"items": { "type": "string" }
+}
+},
+"required": ["topic", "definition", "examples"]
+
+}
+}
+
+
+
 })
 });
 

@@ -129,19 +129,20 @@ headers: {
 
 
 async logoutApi(){
-const token = ApplicationSettings.getString('access_token',null);
-return await Http.request(
-{
+const auth=new Auth;
+const token = await auth.newToken();
+return await Http.request({
 url: 'https://ycmlubeulbufsfrvbmal.supabase.co/auth/v1/logout',
-method: 'GET',
+method: 'POST',
 headers: {
 'Content-Type': 'application/json',
 'apikey': key,
 'Authorization': 'Bearer ' + token
 }
+});
 }
-);
-}
+
+
 
 
 
@@ -205,7 +206,7 @@ async refreshToken(){
 
     newToken=JSON.parse(newToken.content);
     newToken=newToken.access_token;
-    
+
 
 
 return newToken;
@@ -221,11 +222,46 @@ return newToken;
     }
 
 
-async signOut(){
+
+async newToken(){
+const token=ApplicationSettings.getString('access_token',null);
+try{
 const auth=new Auth();
-
-
+const getUser= await auth.getUserApi(token);
+if(getUser){
+if(getUser.statusCode==403){
+const refresh = await auth.tokenRefresh();
+if(!refresh){return;}
+if(refresh.statusCode==200){
+const data=refresh.content.toJSON();
+const access_token=data.access_token;
+ApplicationSettings.setString('access_token',access_token);
+return access_token;
+}else{
+return token;
 }
+}else if(getUser.statusCode==200){
+return token;
+}
+}
+}catch(error){
+console.log(error);
+}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -1,9 +1,15 @@
 <script>
 import * as ApplicationSettings from '@nativescript/core/application-settings';
 import UserProfile from './UserProfile.vue';
+import Auth from './api/authApi';
+
+
+
 export default {
 components:{
 UserProfile,
+
+
 },
 
 data(){return{
@@ -23,12 +29,21 @@ this.user_class=user.class;
 
 userProfileNav(){
 this.$navigateTo(UserProfile);
+},
+
+
+
+async logout(){
+const auth = new Auth();
+const close = await auth.logoutApi();
+if(close.statusCode==403){
+ApplicationSettings.clear();
+this.$navigateTo(require('./Login.vue').default,{ clearHistory: true });
+
 }
 
 
-
-
-
+}
 },
 
 
@@ -63,62 +78,38 @@ this.userDetails();
 
 <StackLayout padding="15" spacing="10">
 
-    <!-- Profile Settings -->
-    <StackLayout padding="15" backgroundColor="white" borderRadius="12" @tap="userProfileNav">
-      <Label text="Profile" fontSize="16" fontWeight="bold" color="#2C3E50"/>
-      <Label text="Update your personal information" fontSize="14" color="#7F8C8D" marginTop="2"/>
-    </StackLayout>
 
-    <!-- Notifications -->
-    <StackLayout padding="15" backgroundColor="white" borderRadius="12">
-      <Label text="Notifications" fontSize="16" fontWeight="bold" color="#2C3E50"/>
-      <Label text="Manage push notifications" fontSize="14" color="#7F8C8D" marginTop="2"/>
-    </StackLayout>
-
-    <!-- Theme -->
-    <!-- <StackLayout padding="15" backgroundColor="white" borderRadius="12">
-      <Label text="Theme" fontSize="16" fontWeight="bold" color="#2C3E50"/>
-      <Label text="Switch between light and dark mode" fontSize="14" color="#7F8C8D" marginTop="2"/>
-    </StackLayout> -->
-
-
-
-<!-- About -->
-<StackLayout padding="15" backgroundColor="white" borderRadius="12">
-  <Label text="Class" fontSize="16" fontWeight="bold" color="#2C3E50"/>
-  <Label :text="'You are in '+user_class" fontSize="14" color="#7F8C8D" marginTop="2"/>
+<StackLayout padding="15" backgroundColor="white" borderRadius="12" @tap="userProfileNav">
+<Label text="Profile" fontSize="16" fontWeight="bold" color="#2C3E50"/>
+<Label text="Update your personal information" fontSize="14" color="#7F8C8D" marginTop="2"/>
 </StackLayout>
 
 
-
-
-
-
-    <!-- About -->
-    <StackLayout padding="15" backgroundColor="white" borderRadius="12">
-      <Label text="Subscription package" fontSize="16" fontWeight="bold" color="#2C3E50"/>
-      <Label text="SchoolMate Primee" fontSize="14" color="#7F8C8D" marginTop="2"/>
-    </StackLayout>
-
-
-
-
-<!-- About -->
 <StackLayout padding="15" backgroundColor="white" borderRadius="12">
-  <Label text="LogOut" fontSize="16" fontWeight="bold" color="#2C3E50"/>
-  <!-- <Label text="Sign out the application" fontSize="14" color="#7F8C8D" marginTop="2"/> -->
+<Label text="Notifications" fontSize="16" fontWeight="bold" color="#2C3E50"/>
+<Label text="Manage push notifications" fontSize="14" color="#7F8C8D" marginTop="2"/>
 </StackLayout>
 
 
+<StackLayout padding="15" backgroundColor="white" borderRadius="12">
+<Label text="Class" fontSize="16" fontWeight="bold" color="#2C3E50"/>
+<Label :text="'You are in '+user_class" fontSize="14" color="#7F8C8D" marginTop="2"/>
+</StackLayout>
 
 
+<StackLayout padding="15" backgroundColor="white" borderRadius="12">
+<Label text="Subscription package" fontSize="16" fontWeight="bold" color="#2C3E50"/>
+<Label text="SchoolMate Primee" fontSize="14" color="#7F8C8D" marginTop="2"/>
+</StackLayout>
 
-  </StackLayout>
+
+<StackLayout padding="15" backgroundColor="white" borderRadius="12" @tap="logout">
+<Label text="LogOut" fontSize="16" fontWeight="bold" color="#2C3E50"/>
+<!-- <Label text="Sign out the application" fontSize="14" color="#7F8C8D" marginTop="2"/> -->
+</StackLayout>
 
 
-
-
-
+</StackLayout>
 </StackLayout>
 </Page>
 </template>

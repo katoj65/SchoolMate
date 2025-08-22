@@ -83,10 +83,12 @@ ApplicationSettings.setBoolean('session',true);
 
 //create session.
 const userData=await auth.userSession();
+
+
+
 if(userData){
 
 if(userData.statusCode==200){
-
 const user=JSON.parse(userData.content);
 const metadata=user.user_metadata;
 ApplicationSettings.setString('user',JSON.stringify(metadata));

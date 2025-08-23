@@ -172,7 +172,7 @@ console.log(error);
     <ScrollView height="100%">
     <StackLayout paddingTop="30%">
 
-    <Label text.decode="&#xf076;" class="fas" fontSize="60" color="black" textAlignment="center"/>
+    <Label text.decode="&#xf6d1;" class="fas" fontSize="70" color="black" textAlignment="center"/>
 
 
 

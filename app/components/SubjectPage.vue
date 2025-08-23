@@ -84,14 +84,19 @@ this.getSubject();
 <template>
 <Page actionBarHidden="true">
 <StackLayout backgroundColor="#F9FAFB" height="100%">
+
+
 <StackLayout padding="20" backgroundColor="#F0F2F5">
 <Label :text="title" fontSize="22" fontWeight="bold" color="#1F2937" textAlignment="left"/>
 <Label text="Topics Overview" fontSize="14" color="#6B7280" textAlignment="left" marginTop="6"/>
 </StackLayout>
 
-<ScrollView height="100%" v-if="isLoading==false">
-<StackLayout padding="20" spacing="16" v-if="topics.length>0">
 
+
+
+
+<ScrollView height="100%" v-if="isLoading==false">
+<StackLayout padding="10" spacing="16" v-if="topics.length>0">
 
 <StackLayout backgroundColor="#FFFFFF" borderRadius="14" padding="16" v-for="(t,key) in topics" :key="key" @tap="topicNav(t.id)">
 <Label :text="t.name" fontSize="18" fontWeight="bold" color="#1F2937" marginBottom="6"/>

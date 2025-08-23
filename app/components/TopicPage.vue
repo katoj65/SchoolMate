@@ -101,13 +101,14 @@ this.getTopics();
 
 
 <ScrollView height="100%">
-<StackLayout padding="20" spacing="15">
+<StackLayout padding="10" spacing="15">
 
 <Label :text="subtitle"
 fontSize="14"
 color="#2C3E50"
 textWrap="true"
 marginBottom="10"
+padding="10"
 />
 
 

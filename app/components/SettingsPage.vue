@@ -10,11 +10,12 @@ components:{
 UserProfile,
 
 
+
 },
 
 data(){return{
 user_class:null,
-
+isLoading:false,
 
 }},
 
@@ -34,16 +35,23 @@ this.$navigateTo(UserProfile);
 
 
 async logout(){
+this.isLoading=true;
 const auth = new Auth();
 const close = await auth.logoutApi();
-if(close.statusCode==403){
 ApplicationSettings.clear();
+this.isLoading=false;
 this.$navigateTo(require('./Login.vue').default,{ clearHistory: true });
 
 }
 
 
-}
+
+
+
+
+
+
+
 },
 
 
@@ -103,10 +111,19 @@ this.userDetails();
 </StackLayout>
 
 
-<StackLayout padding="15" backgroundColor="white" borderRadius="12" @tap="logout">
-<Label text="LogOut" fontSize="16" fontWeight="bold" color="#2C3E50"/>
+<StackLayout padding="15" borderRadius="12" >
+<Button text="LOGOUT" class="btn-primary" marginTop="10" @tap="logout"/>
+
+
+<!-- <Label text="LogOut" fontSize="16" fontWeight="bold" color="#2C3E50"/> -->
 <!-- <Label text="Sign out the application" fontSize="14" color="#7F8C8D" marginTop="2"/> -->
 </StackLayout>
+
+<StackLayout v-if="isLoading==true">
+<ActivityIndicator busy="true" color="black" />
+</StackLayout>
+
+
 
 
 </StackLayout>

@@ -3,6 +3,7 @@ import * as ApplicationSettings from '@nativescript/core/application-settings';
 import Time from '../controllers/time';
 import TimetablePage from '../TimetablePage.vue';
 import TimetableContent from '../modals/TimetableContent.vue';
+import Term from '../controllers/terms';
 
 
 export default {
@@ -17,6 +18,7 @@ TimetableContent,
 
 
 data(){return{
+term:'',
 fname:null,
 user_class:null,
 hours:null,
@@ -75,14 +77,13 @@ this.$navigateTo(TimetablePage);
 
 timetableContentModal(){
 this.$showModal(TimetableContent,{ fullscreen: true, props: { id: 14 }});
+},
+
+async getTerm(){
+const term=new Term();
+const res=await term.termRunning();
+this.term=res;
 }
-
-
-
-
-
-
-
 
 
 
@@ -93,6 +94,7 @@ this.$showModal(TimetableContent,{ fullscreen: true, props: { id: 14 }});
 mounted(){
 this.intervalId = setInterval(this.timer, 1000);
 this.userData();
+this.getTerm();
 },
 
 beforeMount(){
@@ -128,7 +130,7 @@ color="#6B7280"
 
 <Label marginTop="10" fontSize="15">
 <FormattedString>
-<Span :text="'You are in  '+user_class+'  '" color="#374151"/>
+<Span :text="'You are in  '+user_class+' , '+term" color="#374151"/>
 </FormattedString>
 </Label>
 
@@ -159,12 +161,12 @@ color="#111827"
 </GridLayout>
 
 <GridLayout columns="auto, *" marginTop="8" verticalAlignment="center">
-<Label text.decode="&#xf02d; " class="fas" fontSize="16" color="#6B7280"/>
+<Label text="Subject: " fontSize="15" color="#6B7280"/>
 <Label :text="' '+entry.subject" col="1" fontSize="15" color="#374151"/>
 </GridLayout>
 
 <GridLayout columns="auto, *" marginTop="5" verticalAlignment="center">
-<Label text.decode="&#xf017;" class="fas" fontSize="16" color="#6B7280"/>
+<Label text="Time: " fontSize="15" color="#6B7280"/>
 <Label :text="'  ' + entry.time" col="1" fontSize="14" color="#4B5563"/>
 </GridLayout>
 

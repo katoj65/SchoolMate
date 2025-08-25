@@ -120,9 +120,61 @@ console.log(error);
 
 
 
+},
+
+
+async signUp(){
+
+this.error=null;
+if(!this.register.fname || !this.register.lname || !this.register.email || !this.register.password){
+this.error='Fill in all fields';
+return;
+}
+
+try{
+this.isLoading=true;
+const auth=new Auth();
+const response=await auth.signupApi(this.register.fname, this.register.lname, this.register.email, this.register.password);
+if(!response){
+return;
+}
+
+if(response.statusCode==200){
+const data = response.content ? response.content.toJSON() : {};
+const userdata = JSON.stringify(data.user.user_metadata);
+
+const refresh_token = data.refresh_token;
+const token = data.access_token;
+
+ApplicationSettings.setString('access_token', token);
+ApplicationSettings.setString('refresh_token', refresh_token);
+ApplicationSettings.setBoolean('session',true);
+ApplicationSettings.setString('user', userdata);
+
+this.$navigateTo(Home,{clearHistory: true});
+
+}else if(response.statusCode=422) {
+this.error='User already registered';
+}else{
+this.error='Registration failed. Please try again.';
+console.log(response.statusCode);
+}
+
+this.isLoading=false;
+
+}catch(error){
+console.log(error);
 }
 
 
+
+
+
+
+
+
+
+}
 
 
 
@@ -252,7 +304,7 @@ console.log(error);
     marginTop="10"
     />
 
- <Button text="SIGNUP" class="btn-primary" marginTop="10" v-if="isLoading==false"/>
+ <Button text="SIGNUP" class="btn-primary" marginTop="10" v-if="isLoading==false" @tap="signUp"/>
  <spinner-button v-else title="SIGNUP" marginTop="10"/>
 
 

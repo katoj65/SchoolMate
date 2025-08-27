@@ -150,6 +150,7 @@ ApplicationSettings.setString('access_token', token);
 ApplicationSettings.setString('refresh_token', refresh_token);
 ApplicationSettings.setBoolean('session',true);
 ApplicationSettings.setString('user', userdata);
+ApplicationSettings.setString('status','registered');
 
 this.$navigateTo(Home,{clearHistory: true});
 

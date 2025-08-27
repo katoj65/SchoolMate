@@ -1,30 +1,42 @@
 <script>
 import * as ApplicationSettings from '@nativescript/core/application-settings';
+import SelectGender from '../modals/SelectGender.vue';
+import SelectClass from '../modals/SelectClass.vue';
+import FormError from './FormError.vue';
+import UserProfile from '../UserProfile.vue';
+import SpinnerButton from './SpinnerButton.vue';
+import Auth from '../api/authApi';
+
 export default {
+components:{
+SelectClass,
+SelectGender,
+FormError,
+UserProfile,
+SpinnerButton
+
+},
+
+
+
 data() {
 return {
+error:null,
 fname: null,
 lname: null,
 email: null,
 
 isLaoding:false,
+
 form:{
 gender:'Select',
-year:'',
-month:'',
-day:'',
+year:'1990',
+month:'12',
+day:'26',
 class:'Select',
-school:'',
-tel:''
+school:'Kikaaya College School',
+tel:'0752567534'
 },
-
-
-
-
-
-
-
-
 
 
 
@@ -41,8 +53,78 @@ this.fname = data.first_name;
 this.lname = data.last_name;
 this.email = data.email;
 }
-}
 },
+
+
+selectGenderModal(){
+this.$showModal(SelectGender).then((gender)=>{
+this.form.gender=gender;
+});
+},
+
+
+
+selectClassModal(){
+this.$showModal(SelectClass).then((response)=>{
+this.form.class=response;
+});
+},
+
+
+
+async submit(){
+this.error=null;
+if(!this.form.year || !this.form.month || !this.form.day || !this.form.school || !this.form.tel){
+this.error='Fill in all fields';
+return;
+}
+
+if(this.form.gender=='Select' || this.form.class=='Select'){
+this.error='Fill in all fields';
+return;
+}
+
+this.isLaoding=true;
+const input = {
+gender:this.form.gender,
+day:this.form.day,
+month:this.form.month,
+year:this.form.year,
+tel:this.form.tel,
+class:this.form.class,
+school:this.form.school,
+};
+
+const api = new Auth();
+const update = await api.updateUserMetadata(input);
+this.isLaoding = false;
+if(!update){
+return;
+}
+
+if(update.statusCode==200){
+
+const user = update.content.toJSON();
+const metadata = user.user_metadata;
+ApplicationSettings.setString('user',JSON.stringify(metadata));
+ApplicationSettings.setString('status','completed');
+this.$navigateTo(UserProfile);
+
+}else{
+console.log(update);
+this.error='Error has occurred.';
+}
+
+}
+
+
+
+
+},
+
+
+
+
 
 mounted() {
 this.getUser();
@@ -78,6 +160,8 @@ alignItems="center">
 
 
 <StackLayout padding="35" borderRadius="20" marginTop="20" backgroundColor="#f0f2f5">
+<form-error :error="error"/>
+
 
 
 <StackLayout padding="0" marginBottom="20">
@@ -100,6 +184,7 @@ height="50"
 paddingLeft="12"
 paddingRight="12"
 class="input"
+@tap="selectGenderModal"
 
 
 >
@@ -270,6 +355,7 @@ horizontalAlignment="center"
     paddingLeft="12"
     paddingRight="12"
     class="input"
+    @tap="selectClassModal"
 
 
     >
@@ -296,9 +382,10 @@ horizontalAlignment="center"
 
 
 
-
-
-<Button text="Save" class="btn-primary" marginTop="10"/>
+<StackLayout padding="0" marginTop="10">
+<Button text="SAVE" class="btn-primary" margin="0" @tap="submit" v-if="isLaoding==false" />
+<spinner-button :title="'SAVE'" v-else/>
+</StackLayout>
 
 
 

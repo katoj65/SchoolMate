@@ -4,6 +4,7 @@ import AppLayout from './Layout/AppLayout.vue';
 import Timetable from './templates/Timetable.vue';
 import CreateUserProfile from './templates/CreateUserProfile.vue';
 
+
 export default {
 components:{
 AppLayout,
@@ -12,21 +13,14 @@ CreateUserProfile
  },
 
 data(){return{
-user:null,
 status:null,
-
-
-
 
 }},
 
+
 methods:{
 getUser(){
-const user=ApplicationSettings.getString('user',null);
-const user_data=JSON.parse(user);
-this.user=user_data;
-this.status=user_data.profile_status;
-
+this.status=ApplicationSettings.getString('status','completed');
 },
 
 
@@ -34,27 +28,21 @@ this.status=user_data.profile_status;
 
 
 },
-
 
 
 mounted(){
+console.log(this.status);
+},
+
+created(){
 this.getUser();
-
-},
-
-
-computed:{
-userStatus(){
-const user=ApplicationSettings.getString('user',null);
-const user_data=JSON.parse(user);
-return user_data.profile_status;
 },
 
 
 
 
 
-}
+
 
 
 
@@ -70,9 +58,12 @@ return user_data.profile_status;
 <StackLayout backgroundColor="#F9FAFB" height="100%">
 <app-layout>
 
-<create-user-profile v-if="userStatus=='registered'"/>
-<timetable v-else /> 
-
+<StackLayout v-if="status=='registered'">
+<create-user-profile/>
+</StackLayout>
+<StackLayout v-else>
+<timetable/>
+</StackLayout>
 
 </app-layout>
 </StackLayout>

@@ -1,9 +1,8 @@
 <script>
 import * as ApplicationSettings from '@nativescript/core/application-settings';
+
 export default {
-
 data(){return{
-
 fname:null,
 lname:null,
 dob:null,
@@ -12,8 +11,6 @@ school:null,
 email:null,
 tel:null,
 gender:null,
-
-
 
 }},
 
@@ -29,12 +26,14 @@ this.email=user.email;
 this.school=user.school;
 this.tel=user.tel;
 this.gender=user.gender;
+
 }
 
 
 },
 mounted(){
 this.getUser();
+
 }
 
 
@@ -54,6 +53,7 @@ this.getUser();
 
 
 <ScrollView backgroundColor="#F9FAFB" height="100%">
+
     <StackLayout backgroundColor="#F3F4F6" spacing="20">
     <!-- Profile Header -->
     <StackLayout padding="10" horizontalAlignment="center" spacing="10">
@@ -66,7 +66,12 @@ this.getUser();
     </StackLayout>
 
     <!-- Profile Info Section -->
-    <StackLayout padding="20" spacing="15">
+    <StackLayout padding="5" spacing="15">
+
+
+
+<StackLayout shadowRadius="4" backgroundColor="white" padding="10" borderRadius="10">
+
 
 
     <!-- Each row of info -->
@@ -103,6 +108,9 @@ this.getUser();
     <Label :text="user_class" fontSize="16" color="#374151" col="1"/>
     </GridLayout>
 
+
+
+</StackLayout>
 
 
 

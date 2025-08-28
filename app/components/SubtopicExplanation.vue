@@ -3,6 +3,10 @@ import Vue from 'nativescript-vue';
 Vue.registerElement('HTMLLabel', () => require('@nativescript-community/ui-label').Label);
 import subtopicExplanation from './ai/subtopicExplanation.js';
 import Skeleton from './templates/Skeleton.vue';
+import LearningProgress from './api/LearningProgress';
+
+
+
 export default {
 components:{
 Skeleton,
@@ -41,7 +45,17 @@ const input=[
 
 this.title=title;
 this.isLoading=true;
+
+
+
 try {
+
+
+
+
+//stop the api fron destroying the page
+return;
+
 const ai = new subtopicExplanation();
 const data = await ai.explanation(input);
 if (!data) return;
@@ -81,7 +95,34 @@ console.log(error);
 
 
 
+},
+
+
+async contentLog(){
+const id = this.subtopic.id;
+const api = new LearningProgress();
+const data = await api.subTopicAccess(id);
+if(!data){return;}
+if(data.statusCode==200){
+console.log(data.statusCode);
+}else{
+console.log(data.statusCode);
 }
+
+
+//console.log(id);
+
+
+
+
+
+}
+
+
+
+
+
+
 
 },
 
@@ -90,10 +131,14 @@ console.log(error);
 
 
 mounted(){
-// console.log(this.subtopic);
 this.explain();
-
+this.contentLog();
 },
+
+
+
+
+
 
 computed:{
 htmlFormatter(item){
@@ -132,7 +177,6 @@ return x;
 
 <StackLayout padding="20" backgroundColor="#f0f2f5">
 <StackLayout v-for="(e,key) in examples" :key="key" marginBottom="30">
-<!-- <Label :text="e" fontSize="16" marginTop="4" textWrap="true" lineHeight="11"/> -->
 
 <HTMLLabel :html="htmlFormatter(e)" fontSize="16" marginTop="4" lineHeight="11"></HTMLLabel>
 

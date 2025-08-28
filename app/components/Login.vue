@@ -73,7 +73,7 @@ const auth = new Auth();
 const response = await auth.loginApi(this.form.email,this.form.password);
 if(response){
 
-this.isLoading=false;
+
 
 if(response.statusCode==200){
 const data=response.content ? response.content.toJSON():{};
@@ -104,7 +104,7 @@ console.log(response.statusCode);
 this.error='Invalid user email or password';
 }
 
-
+this.isLoading=false;
 
 }else{
 console.log(error);

@@ -112,7 +112,7 @@ clearInterval(this.intervalId);
 <template>
 <StackLayout padding="20" backgroundColor="#F9FAFB">
 <Label
-:text="greetings+' '+fname+' 🎉'"
+:text="greetings+' '+fname"
 fontSize="20"
 color="#111827"
 style="text-transform: capitalize;"

@@ -73,6 +73,8 @@ const auth = new Auth();
 const response = await auth.loginApi(this.form.email,this.form.password);
 if(response){
 
+this.isLoading=false;
+
 if(response.statusCode==200){
 const data=response.content ? response.content.toJSON():{};
 const token=data.access_token;
@@ -83,8 +85,6 @@ ApplicationSettings.setBoolean('session',true);
 
 //create session.
 const userData=await auth.userSession();
-
-
 
 if(userData){
 
@@ -99,12 +99,13 @@ this.error='Could not find user';
 }
 
 }
-
 }else{
 console.log(response.statusCode);
+this.error='Invalid user email or password';
 }
 
-this.isLoading=false;
+
+
 }else{
 console.log(error);
 }
@@ -211,7 +212,7 @@ console.log(error);
     padding="12">
     <!-- Title -->
     <Label
-    text="SchoolMate"
+    text="Curriculum AI"
     color="black"
     fontSize="25"
     fontWeight="bold"
@@ -225,14 +226,14 @@ console.log(error);
     <ScrollView height="100%">
     <StackLayout paddingTop="30%">
 
-    <Label text.decode="&#xf6d1;" class="fas" fontSize="70" color="black" textAlignment="center"/>
+    <!-- <Label text.decode="&#xf6d1;" class="fas" fontSize="70" color="black" textAlignment="center"/> -->
 
-
+    <Image src="~/assets/logo1.png" width="80" height="80" />
 
 
 <StackLayout v-if="screen==0">
 
-    <Label text="Welcome Back" textAlignment="center" fontSize="20" marginBottom="20" />
+    <Label text="Welcome Back" textAlignment="center" fontSize="20" marginBottom="20" marginTop="20" />
 
     <form-error :error="error"/>
 

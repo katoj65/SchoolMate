@@ -147,13 +147,13 @@ color="#111827"
 
 
 
-<StackLayout padding="15" backgroundColor="#FFFFFF" style="border-radius: 16; elevation: 2;" v-for="(entry, index) in timetable" :key="index" marginBottom="2" @tap="timetableContentModal()">
+<StackLayout padding="15" backgroundColor="#FFFFFF" style="border-radius: 16; elevation: 2;" v-for="(entry, index) in timetable" :key="index" marginBottom="10" @tap="timetableContentModal()">
 <GridLayout columns="*, auto" verticalAlignment="center">
 
 <Label fontSize="17"  color="#111827">
 <FormattedString>
 <Span text.decode="&#xf783;" class="fas" fontSize="18" color="#111827"/>
-<Span :text="' '+entry.day"/>
+<Span :text="' '+entry.day" fontWeight="bold"/>
 </FormattedString>
 </Label>
 

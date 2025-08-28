@@ -3,7 +3,7 @@ import * as ApplicationSettings from '@nativescript/core/application-settings';
 import SelectGender from '../modals/SelectGender.vue';
 import SelectClass from '../modals/SelectClass.vue';
 import FormError from './FormError.vue';
-import UserProfile from '../UserProfile.vue';
+import CompleteRegistration from '../CompleteRegistration.vue';
 import SpinnerButton from './SpinnerButton.vue';
 import Auth from '../api/authApi';
 
@@ -12,7 +12,7 @@ components:{
 SelectClass,
 SelectGender,
 FormError,
-UserProfile,
+CompleteRegistration,
 SpinnerButton
 
 },
@@ -108,7 +108,7 @@ const user = update.content.toJSON();
 const metadata = user.user_metadata;
 ApplicationSettings.setString('user',JSON.stringify(metadata));
 ApplicationSettings.setString('status','completed');
-this.$navigateTo(UserProfile);
+this.$navigateTo(CompleteRegistration);
 
 }else{
 console.log(update);

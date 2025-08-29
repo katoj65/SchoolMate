@@ -108,14 +108,6 @@ console.log(data.statusCode);
 }else{
 console.log(data.statusCode);
 }
-
-
-//console.log(id);
-
-
-
-
-
 }
 
 

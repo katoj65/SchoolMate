@@ -34,7 +34,12 @@ decorView.setSystemUiVisibility(android.view.View.SYSTEM_UI_FLAG_LIGHT_STATUS_BA
 });
 }
 
+
 //ApplicationSettings.clear();
+import { FloatingActionButton } from "@nativescript-community/ui-material-floatingactionbutton";
+Vue.registerElement('Fab', () => FloatingActionButton);
+
+
 
 new Vue({
 render: (h) => h('frame', [h(ApplicationSettings.getBoolean('session',false)==false?Login:Home)]),

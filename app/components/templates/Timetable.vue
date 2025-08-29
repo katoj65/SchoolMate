@@ -110,72 +110,75 @@ clearInterval(this.intervalId);
 
 
 <template>
-<StackLayout padding="20" backgroundColor="#F9FAFB">
-<Label
-:text="greetings+' '+fname"
-fontSize="20"
-color="#111827"
-style="text-transform: capitalize;"
-/>
+    <GridLayout rows="*" columns="*">
 
+        <!-- Content layer -->
+        <StackLayout padding="20" backgroundColor="#F9FAFB" row="0" col="0">
+            <Label
+                :text="greetings+' '+fname"
+                fontSize="20"
+                color="#111827"
+                style="text-transform: capitalize;"
+            />
 
-<Label
-:text="'Today is '+date+' - '+time"
-fontSize="14"
-marginTop="5"
-color="#6B7280"
-/>
+            <Label
+                :text="'Today is '+date+' - '+time"
+                fontSize="14"
+                marginTop="5"
+                color="#6B7280"
+            />
 
+            <Label marginTop="10" fontSize="15">
+                <FormattedString>
+                    <Span :text="'You are in  '+user_class+' , '+term" color="#374151"/>
+                </FormattedString>
+            </Label>
 
+            <Label
+                text="Weekly Revision Timetable"
+                marginTop="20"
+                fontSize="16"
+                color="#111827"
+                @tap="timeTableNav"
+            />
 
-<Label marginTop="10" fontSize="15">
-<FormattedString>
-<Span :text="'You are in  '+user_class+' , '+term" color="#374151"/>
-</FormattedString>
-</Label>
+            <StackLayout marginTop="15" spacing="15">
+                <StackLayout
+                    padding="15"
+                    backgroundColor="#FFFFFF"
+                    style="border-radius: 16; elevation: 2;"
+                    v-for="(entry, index) in timetable"
+                    :key="index"
+                    marginBottom="10"
+                    @tap="timetableContentModal()">
 
+                    <GridLayout columns="*, auto" verticalAlignment="center">
+                        <Label fontSize="17" color="#111827">
+                            <FormattedString>
+                                <Span text.decode="&#xf783;" class="fas" fontSize="18" color="#111827"/>
+                                <Span :text="' '+entry.day"/>
+                            </FormattedString>
+                        </Label>
+                        <Label text.decode="&#xf14a;" class="fas" col="1" fontSize="18" color="#E5E7E9"/>
+                    </GridLayout>
 
-<Label
-text="Weekly Revision Timetable"
-marginTop="20"
-fontSize="16"
-color="#111827"
-@tap="timeTableNav"
-/>
+                    <GridLayout columns="auto, *" marginTop="8" verticalAlignment="center">
+                        <Label text="Subject: " fontSize="15" color="#6B7280"/>
+                        <Label :text="' '+entry.subject" col="1" fontSize="15" color="#374151"/>
+                    </GridLayout>
 
-<StackLayout marginTop="15" spacing="15">
+                    <GridLayout columns="auto, *" marginTop="5" verticalAlignment="center">
+                        <Label text="Time: " fontSize="15" color="#6B7280"/>
+                        <Label :text="'  ' + entry.time" col="1" fontSize="14" color="#4B5563"/>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
 
+        <!-- Overlay FAB layer -->
+        <GridLayout row="0" col="0">
+            
+        </GridLayout>
+    </GridLayout>
 
-
-<StackLayout padding="15" backgroundColor="#FFFFFF" style="border-radius: 16; elevation: 2;" v-for="(entry, index) in timetable" :key="index" marginBottom="10" @tap="timetableContentModal()">
-<GridLayout columns="*, auto" verticalAlignment="center">
-
-<Label fontSize="17"  color="#111827">
-<FormattedString>
-<Span text.decode="&#xf783;" class="fas" fontSize="18" color="#111827"/>
-<Span :text="' '+entry.day" fontWeight="bold"/>
-</FormattedString>
-</Label>
-
-<Label text.decode="&#xf14a;" class="fas" col="1" fontSize="18" color="#E5E7E9"/>
-</GridLayout>
-
-<GridLayout columns="auto, *" marginTop="8" verticalAlignment="center">
-<Label text="Subject: " fontSize="15" color="#6B7280"/>
-<Label :text="' '+entry.subject" col="1" fontSize="15" color="#374151"/>
-</GridLayout>
-
-<GridLayout columns="auto, *" marginTop="5" verticalAlignment="center">
-<Label text="Time: " fontSize="15" color="#6B7280"/>
-<Label :text="'  ' + entry.time" col="1" fontSize="14" color="#4B5563"/>
-</GridLayout>
-
-</StackLayout>
-
-
-
-
-
-</StackLayout>
-</StackLayout>
 </template>

@@ -22,16 +22,16 @@ isLoading:false,
 screen:0,
 
 form:{
-email:'katoj65@gmail.com',
-password:'1234567890'
+email:'',
+password:''
 },
 
 
 register:{
-fname:'kato',
-lname:'joshua',
-email:'katoj65@gmail.com',
-password:'1234567890'
+fname:'',
+lname:'',
+email:'',
+password:''
 
 }
 

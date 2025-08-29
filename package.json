@@ -5,6 +5,7 @@
   "private": true,
   "dependencies": {
     "@nativescript-community/ui-label": "^1.3.33",
+    "@nativescript-community/ui-material-floatingactionbutton": "^7.2.71",
     "@nativescript/core": "~8.9.0",
     "@nativescript/theme": "^3.1.0",
     "@supabase/supabase-js": "^2.55.0",

@@ -12,7 +12,7 @@ export default {
 <!-- Header -->
   <StackLayout padding="20" backgroundColor="#F0F2F5">
   <StackLayout orientation="horizontal" backgroundColor="#F0F2F5">
-  <Label text="Today's Timetable" fontSize="22" fontWeight="bold" color="#1F2937" textAlignment="center" width="80%"/>
+  <Label text="Today's Timetable" fontSize="20" fontWeight="bold" color="#1F2937" textAlignment="center" width="80%"/>
   <Label text="edit_calendar" width="20%" class="fa" fontSize="30" color="#E5E7EB" style="color:silver;"/>
   </StackLayout>
   <Label text="Friday, 15 August 2025" fontSize="14" color="#6B7280" textAlignment="center" marginTop="4" borderRadius="14" backgroundColor="#E5E7EB" padding="6" width="100%"/>

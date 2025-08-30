@@ -94,7 +94,7 @@ this.getTopics();
 
 
 <StackLayout padding="20" backgroundColor="#f0f2f5">
-<Label :text="title" fontSize="22" fontWeight="bold" color="#2C3E50"/>
+<Label :text="title" fontSize="20" fontWeight="bold" color="#2C3E50"/>
 <Label :text="subject" fontSize="14" color="#7F8C8D" marginTop="4"/>
 </StackLayout>
 

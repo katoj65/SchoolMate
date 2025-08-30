@@ -87,7 +87,7 @@ this.getSubject();
 
 
 <StackLayout padding="20" backgroundColor="#F0F2F5">
-<Label :text="title" fontSize="22" fontWeight="bold" color="#1F2937" textAlignment="left"/>
+<Label :text="title" fontSize="20" fontWeight="bold" color="#1F2937" textAlignment="left"/>
 <Label text="Topics Overview" fontSize="14" color="#6B7280" textAlignment="left" marginTop="6"/>
 </StackLayout>
 

@@ -12,7 +12,6 @@ import SelectGender from './modals/SelectGender.vue';
 import SelectClass from './modals/SelectClass.vue';
 import AskPage from './AskPage.vue';
 
-
 export default {
 components:{
 AppLayout,
@@ -23,7 +22,8 @@ FormError,
 UserProfile,
 SpinnerButton,
 CompleteRegistration,
-AskPage
+AskPage,
+
 
 },
 
@@ -179,8 +179,8 @@ this.getUser();
 }
 </script>
 <template>
-<Page actionBarHidden="true">
-<GridLayout rows="*" columns="*">
+<Page actionBarHidden="true" backgroundColor="#F9FAFB">
+<GridLayout rows="*" columns="*" backgroundColor="#F9FAFB" height="100%">
 <StackLayout row="0" col="0" backgroundColor="#F9FAFB" height="100%">
 <app-layout>
 <StackLayout v-if="status=='registered'">
@@ -448,6 +448,9 @@ horizontalAlignment="center"
 </ScrollView>
 </StackLayout>
 <StackLayout v-else>
+
+
+
 <timetable/>
 </StackLayout>
 </app-layout>

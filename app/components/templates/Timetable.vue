@@ -4,6 +4,7 @@ import Time from '../controllers/time';
 import TimetablePage from '../TimetablePage.vue';
 import TimetableContent from '../modals/TimetableContent.vue';
 import Term from '../controllers/terms';
+import Searchbar from './Searchbar.vue';
 
 
 export default {
@@ -14,6 +15,7 @@ user:Object
 components:{
 TimetablePage,
 TimetableContent,
+Searchbar,
 },
 
 
@@ -111,52 +113,49 @@ clearInterval(this.intervalId);
 
 <template>
 <GridLayout rows="*" columns="*">
-
 <!-- Content layer -->
-<StackLayout padding="20" backgroundColor="#F9FAFB" row="0" col="0">
-<Label
-:text="greetings+' '+fname"
-fontSize="20"
-color="#111827"
-style="text-transform: capitalize;"
-/>
+<StackLayout padding="10" backgroundColor="#F9FAFB" row="1" col="0">
 
-<Label
-:text="'Today is '+date+' - '+time"
-fontSize="14"
-marginTop="5"
-color="#6B7280"
-/>
-
-<Label marginTop="10" fontSize="15">
-<FormattedString>
-<Span :text="'You are in  '+user_class+' , '+term" color="#374151"/>
-</FormattedString>
-</Label>
-
-<Label
-text="Weekly Revision Timetable"
-marginTop="20"
-fontSize="16"
-color="#111827"
-@tap="timeTableNav"
-/>
-
-<StackLayout marginTop="15" spacing="15">
+<StackLayout>
+<Searchbar/>
+</StackLayout>
 
 
+<StackLayout padding="10">
+
+    <Label
+    :text="greetings+' '+fname"
+    fontSize="20"
+    color="#111827"
+    style="text-transform: capitalize;"
+    />
+
+    <!-- <Label
+    :text="'Today is '+date+' - '+time"
+    fontSize="14"
+    marginTop="5"
+    color="#6B7280"
+    />  -->
+
+    <!-- <Label marginTop="10" fontSize="15">
+    <FormattedString>
+    <Span :text="'You are in  '+user_class+' , '+term" color="#374151"/>
+    </FormattedString>
+    </Label> -->
+
+    <Label
+    :text="'Your Revision Timetable for '+user_class+' , '+term"
+    marginTop="5"
+    fontSize="16"
+    color="#111827"
+    @tap="timeTableNav"
+    />
 
 
+</StackLayout>
 
 
-
-
-
-
-
-
-
-
+<StackLayout marginTop="10" spacing="15">
 
 
 
@@ -212,9 +211,12 @@ marginBottom="10"
 
 
 </StackLayout>
+
+
+
+
+
 </StackLayout>
-
-
 </GridLayout>
 
 </template>

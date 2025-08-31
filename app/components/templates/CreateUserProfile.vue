@@ -30,12 +30,12 @@ isLaoding:false,
 
 form:{
 gender:'Select',
-year:'1990',
-month:'12',
-day:'26',
+year:'',
+month:'',
+day:'',
 class:'Select',
-school:'Kikaaya College School',
-tel:'0752567534'
+school:'',
+tel:''
 },
 
 

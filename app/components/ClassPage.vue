@@ -4,12 +4,14 @@ import * as ApplicationSettings from '@nativescript/core/application-settings';
 import Skeleton from './templates/Skeleton.vue';
 import SubjectPage from './SubjectPage.vue';
 import ClassMenu from './ClassMenu.vue';
+import LibraryPage from './LibraryPage.vue';
 
 export default {
 components:{
 Skeleton,
 SubjectPage,
-ClassMenu
+ClassMenu,
+LibraryPage
 },
 
 
@@ -69,6 +71,10 @@ this.$navigateTo(SubjectPage,{props:{subject_id:id}});
 classMenuNav(){
 this.$navigateTo(ClassMenu,{
 });
+},
+
+libraryNav(){
+this.$navigateTo(LibraryPage);
 }
 
 
@@ -98,13 +104,11 @@ this.subjectApi();
 
 
 
-
-
-
 <StackLayout padding="20" backgroundColor="#f0f2f5">
 <StackLayout orientation="horizontal">
-<Label text="Subjects" fontSize="20" fontWeight="bold" color="#2C3E50" width="90%"/>
-<Label text.decode="&#xf00b;" width="10%" class="fas" fontSize="25" @tap="classMenuNav"/>
+<Label text="Subjects" fontSize="20" fontWeight="bold" color="#2C3E50" width="80%"/>
+<Label text.decode="&#xf0c9;" width="10%" class="fas" fontSize="25" @tap="classMenuNav"/>
+<Label text.decode="&#xf682;" width="10%" class="fas" fontSize="25" @tap="libraryNav" marginLeft="12"/>
 </StackLayout>
 <StackLayout>
 <Label :text="title" fontSize="14" color="#7F8C8D" marginTop="4" width="100%"/>

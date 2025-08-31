@@ -37,7 +37,7 @@ menu:[
 <StackLayout backgroundColor="#F9FAFB" height="100%">
 <StackLayout padding="20" backgroundColor="#f0f2f5">
 <StackLayout orientation="horizontal">
-<Label text="Subjects" fontSize="22" fontWeight="bold" color="#2C3E50" width="100%"/>
+<Label text="Subjects" fontSize="20" fontWeight="bold" color="#2C3E50" width="100%"/>
 </StackLayout>
 <StackLayout>
 <!-- <Label text="Menu" fontSize="14" color="#7F8C8D" marginTop="4" width="100%"/> -->

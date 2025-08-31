@@ -144,9 +144,9 @@ clearInterval(this.intervalId);
     </Label> -->
 
     <Label
-    :text="'Your Revision Timetable for '+user_class+' , '+term"
+    :text="'You are in '+user_class+' and it is '+term"
     marginTop="5"
-    fontSize="16"
+    fontSize="14"
     color="#111827"
     @tap="timeTableNav"
     />

@@ -1,10 +1,13 @@
 <script>
+import { StackLayout } from '@nativescript/core';
 import ClassPage from '../ClassPage.vue';
 import SettingsPage from '../SettingsPage.vue';
+import Searchbar from '../templates/Searchbar.vue';
 export default {
 components:{
 ClassPage,
-SettingsPage
+SettingsPage,
+Searchbar
 },
 
 
@@ -52,6 +55,7 @@ this.$navigateTo(SettingsPage);
 <RootLayout>
 <GridLayout rows="auto, *">
 <!-- Header -->
+<StackLayout backgroundColor="#f0f2f5">
 <GridLayout
 row="0"
 columns="*, auto, auto"
@@ -61,7 +65,7 @@ padding="12">
 <Label
 col="0"
 text="Curriculum AI"
-fontSize="22"
+fontSize="20"
 fontWeight="bold"
 verticalAlignment="middle"
 color="#2C3E50"
@@ -94,9 +98,18 @@ paddingRight="10"
 @tap="settingsNav"
 
 />
+
 </GridLayout>
+<StackLayout padding="0 20" backgroundColor="#f0f2f5">
+<Searchbar marginBottom="10"/>
+</StackLayout>
+</StackLayout>
+
+
+
 
 <!-- Content -->
+
 <StackLayout row="1" backgroundColor="white" height="100%">
 <ScrollView height="100%">
 <StackLayout>

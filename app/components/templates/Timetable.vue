@@ -5,6 +5,7 @@ import TimetablePage from '../TimetablePage.vue';
 import TimetableContent from '../modals/TimetableContent.vue';
 import Term from '../controllers/terms';
 import Searchbar from './Searchbar.vue';
+import TestPage from './TestPage.vue';
 
 
 export default {
@@ -16,6 +17,7 @@ components:{
 TimetablePage,
 TimetableContent,
 Searchbar,
+TestPage
 },
 
 
@@ -85,6 +87,10 @@ async getTerm(){
 const term=new Term();
 const res=await term.termRunning();
 this.term=res;
+},
+
+testNav(){
+this.$navigateTo(TestPage);
 }
 
 
@@ -116,37 +122,34 @@ clearInterval(this.intervalId);
 <!-- Content layer -->
 <StackLayout padding="10" backgroundColor="#F9FAFB" row="1" col="0">
 
-<StackLayout>
-<Searchbar/>
-</StackLayout>
+<StackLayout padding="0 10">
 
-
-<StackLayout padding="10">
-
-    <Label
-    :text="greetings+' '+fname"
-    fontSize="20"
-    color="#111827"
-    style="text-transform: capitalize;"
-    />
+<!-- <Label
+:text="greetings+' '+fname"
+fontSize="20"
+color="#111827"
+style="text-transform: capitalize;"
+@tap="testNav"
+/> -->
 
     <!-- <Label
     :text="'Today is '+date+' - '+time"
     fontSize="14"
     marginTop="5"
     color="#6B7280"
-    />  -->
+    /> -->
 
-    <!-- <Label marginTop="10" fontSize="15">
+    <!-- <Label marginTop="10" fontSize="15" >
     <FormattedString>
-    <Span :text="'You are in  '+user_class+' , '+term" color="#374151"/>
+    <Span :text="'You are in  '+user_class+' , '+term"   color="#6B7280"/>
     </FormattedString>
     </Label> -->
 
     <Label
-    :text="'You are in '+user_class+' and it is '+term"
+    text="Your Revision Timetable"
+    fontWeight="bold"
     marginTop="5"
-    fontSize="14"
+    fontSize="18"
     color="#111827"
     @tap="timeTableNav"
     />

@@ -22,9 +22,6 @@ password: password
 
 
 
-
-
-
 async signupApi(fname,lname, email, password) {
 return await Http.request({
 url: 'https://ycmlubeulbufsfrvbmal.supabase.co/auth/v1/signup',
@@ -51,7 +48,6 @@ role:'student'
 })
 });
 }
-
 
 
 async getUserApi(token) {
@@ -90,8 +86,6 @@ profile_status:'completed'
 }
 })
 });
-
-
 }
 
 
@@ -110,8 +104,6 @@ user.push(data.user_metadata);
 .catch((error)=>{console.log(error);});
 return user;
 }
-
-
 
 
 async userSession() {
@@ -141,11 +133,6 @@ headers: {
 }
 });
 }
-
-
-
-
-
 
 
 async secureToken(){
@@ -186,9 +173,6 @@ return await Http.request({
 }
 
 
-
-
-
 //use before making any request
 async refreshToken(){
     const token=ApplicationSettings.getString('access_token',null);
@@ -219,9 +203,7 @@ return newToken;
     console.log(error);
     }
 
-    }
-
-
+}
 
 async newToken(){
 const token=ApplicationSettings.getString('access_token',null);
@@ -248,6 +230,53 @@ return token;
 console.log(error);
 }
 }
+
+
+
+async userToken(){
+//get the token
+try{
+let token=ApplicationSettings.getString('access_token',null);
+//check if  token is valid
+const auth=new Auth();
+const check = await auth.getUserApi(token);
+//if token is invalid return token
+if(!check){token=token;}
+if(check.statusCode==403){
+//refresh the token
+const ref_token=ApplicationSettings.getString('refresh_token',null);
+const ref=await Http.request({
+url: 'https://ycmlubeulbufsfrvbmal.supabase.co/auth/v1/token?grant_type=refresh_token',
+method: 'POST',
+headers: {
+'Content-Type': 'application/json',
+'apikey': key
+},
+content: JSON.stringify({
+refresh_token: ref_token
+})
+});
+if(!ref){
+token=token;
+}else{
+if(ref.statusCode==200){
+const data=JSON.parse(ref.content);
+token=data.access_token;
+ApplicationSettings.setString('access_token',token);
+}else{
+token=token;
+console.log(ref.statusCode);
+}
+}
+}
+return token;
+}catch(error){
+console.log(error);
+}
+}
+
+
+
 
 
 

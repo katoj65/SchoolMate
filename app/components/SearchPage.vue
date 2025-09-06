@@ -47,6 +47,12 @@ tf.ios.becomeFirstResponder();
 
 async submit(){
 const search = this.form.search;
+if(search.length<3){
+this.row=[];
+this.topic=[];
+this.subject=[];
+return;
+}
 if(search.length > 2){
 try{
 this.isLoading=true;
@@ -57,6 +63,7 @@ if(!response)return;
 if(response.statusCode==200){
 const data=JSON.parse(response.content);
 this.row=data;
+console.log(data);
 
 //search topic
 const topic= await api.searchTopic(search);
@@ -86,7 +93,7 @@ console.log(topic.statusCode);
 console.log(response.statusCode);
 }
 
-this.createSearchLog(search);
+// this.createSearchLog(search);
 this.isLoading=false;
 
 }catch(error){
@@ -101,15 +108,15 @@ this.$navigateTo(TopicPage,{props:{topic_id:obj.topic.id}});
 },
 
 
+
+
+
 //create search log
 async createSearchLog(input){
 const api = new Search();
 const response = await api.postSearchLog(input);
 if(!response) return;
 console.log(response);
-
-
-
 }
 
 
@@ -162,10 +169,37 @@ v-model="form.search"
 <!-- Example search result -->
 
 
+
+<StackLayout v-if="row.length > 0">
 <StackLayout padding="15" backgroundColor="white" borderRadius="10" elevation="2" v-for="(r,key) in row" :key="key">
 <Label :text="r.name" fontSize="16" fontWeight="bold" color="#111827"/>
 <Label :text="r.description" fontSize="14" color="#6B7280" marginTop="4"/>
 <Label :text="r.topic.subject.name+' - '+r.topic.name" color="silver"/>
+</StackLayout>
+</StackLayout>
+
+
+
+
+
+<StackLayout v-if="topic.length > 0" marginTop="10" spacing="10">
+<StackLayout v-for="(t,key) in topic" :key="key" padding="15" backgroundColor="white" borderRadius="10" elevation="2">
+<Label :text="t.name" fontSize="16" fontWeight="bold" color="#111827"/>
+<Label :text="t.description" fontSize="14" color="#6B7280" marginTop="4"/>
+<Label text="Topic" color="silver"/>
+</StackLayout>
+</StackLayout>
+
+
+
+
+
+<StackLayout v-if="subject.length > 0" marginTop="10" spacing="10">
+<StackLayout v-for="(s,key) in subject" :key="key" padding="15" backgroundColor="white" borderRadius="10" elevation="2">
+<Label :text="s.name" fontSize="16" fontWeight="bold" color="#111827"/>
+<Label :text="s.description" fontSize="14" color="#6B7280" marginTop="4"/>
+<Label text="Subject" color="silver"/>
+</StackLayout>
 </StackLayout>
 
 

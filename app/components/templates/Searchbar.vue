@@ -27,7 +27,6 @@ this.$navigateTo(SearchPage);
 mounted(){
 
 
-
 },
 computed:{
 
@@ -35,6 +34,7 @@ computed:{
 
 
 }
+
 </script>
 <template>
 <GridLayout
@@ -64,7 +64,7 @@ marginLeft="10" @tap="searchNav()"/>
 hint="Search for subjects, topics..."
 hintColor="#D3D3D3"
 col="1"
-fontSize="16"
+fontSize="15"
 color="#D3D3D3"
 borderWidth="0"
 backgroundColor="transparent"

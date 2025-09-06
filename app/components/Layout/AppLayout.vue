@@ -1,8 +1,10 @@
 <script>
-import { StackLayout } from '@nativescript/core';
+import * as ApplicationSettings from '@nativescript/core/application-settings';
 import ClassPage from '../ClassPage.vue';
 import SettingsPage from '../SettingsPage.vue';
 import Searchbar from '../templates/Searchbar.vue';
+
+
 export default {
 components:{
 ClassPage,
@@ -30,18 +32,24 @@ this.$navigateTo(ClassPage);
 
 settingsNav(){
 this.$navigateTo(SettingsPage);
-}
-
-
-
-
-
+},
 
 
 },
 
 
 
+computed: {
+status(){
+const user=ApplicationSettings.getString('user',null);
+const status=user ? JSON.parse(user) : null;
+return status.profile_status;
+}
+
+
+
+
+}
 
 
 }
@@ -55,7 +63,7 @@ this.$navigateTo(SettingsPage);
 <RootLayout>
 <GridLayout rows="auto, *">
 <!-- Header -->
-<StackLayout backgroundColor="#f0f2f5">
+<StackLayout backgroundColor="#f0f2f5" v-if="status=='completed'">
 <GridLayout
 row="0"
 columns="*, auto, auto"
@@ -100,7 +108,7 @@ paddingRight="10"
 />
 
 </GridLayout>
-<StackLayout padding="0 20" backgroundColor="#f0f2f5">
+<StackLayout padding="0 20" backgroundColor="#f0f2f5" >
 <Searchbar marginBottom="10"/>
 </StackLayout>
 </StackLayout>
